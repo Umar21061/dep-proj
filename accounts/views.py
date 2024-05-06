@@ -11,7 +11,7 @@ def login(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             if username==settings.UNAME and password==settings.PSWRD:
-                return render(request,'sidebar.html')
+                return render(request,'orders.html')
             else:
                 print(settings.UNAME+" "+settings.PSWRD)
                 return render(request,'login.html',{'error_message': 'Invalid username or password'})
