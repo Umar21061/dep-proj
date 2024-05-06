@@ -1,13 +1,12 @@
 var sidebar = document.getElementById('sidebar');
 var sidebarToggle = document.getElementById('sidebarToggle');
 var openDropdown = null;
-
+var rArrowIc=null;
 
 // Function to check if cursor is outside the sidebar
 sidebar.addEventListener('mouseleave', function() {
   if(openDropdown==null){
     sidebar.style.transform = 'translateX(-250px)';
-
   }
 });
 
@@ -47,15 +46,32 @@ function addOptionWithSubItems(text, subItems) {
     subItem.appendChild(subLink);
     subItemsList.appendChild(subItem);
 
+
+
     // Add hover event listener to sub-item
     subItem.addEventListener('mouseenter', function(event) {
       event.stopPropagation(); // Prevent the parent link from being triggered
 
+
+
+      // Calculate the position of the hovered sub-item relative to the viewport
+      var subItemRect = subItem.getBoundingClientRect();
+      var dropdownTop = subItemRect.top;
+      var dropdownLeft = subItemRect.left;
+      
       // Close any open dropdowns
       if (openDropdown) {
+        rArrowIc.remove();
+        rArrowIc=null;
         openDropdown.remove();
         openDropdown = null;
       }
+
+      var rarrowIcon = document.createElement('i');
+      rarrowIcon.classList.add('fas', 'fa-chevron-right');
+      rarrowIcon.style.marginRight = '3px'; // Add margin to the arrow icon
+      rArrowIc=rarrowIcon;
+      subLink.appendChild(rarrowIcon);
 
       if (typeof item.subOptions !== 'undefined' && Array.isArray(item.subOptions)) {
         var dropdownContainer = document.getElementById('dropdownContainer');
@@ -68,9 +84,8 @@ function addOptionWithSubItems(text, subItems) {
           dropdownLink.textContent = subOption.text;
           dropdownContent.appendChild(dropdownLink);
         });
-        dropdownContent.style.top = (event.pageY + 10) + 'px'; // Position below the cursor
-        dropdownContent.style.left ='250px';
-       // dropdownContent.style.left = (event.pageX + 10) + 'px'; // Position to the right of the cursor
+        dropdownContent.style.top = dropdownTop + 'px'; // Position below the hovered sub-item
+        dropdownContent.style.left =  '250px'; // Position to the right of the hovered sub-item
         dropdownContent.style.display = 'block'; // Ensure visibility
         openDropdown = dropdownContent;
         dropdownContainer.appendChild(dropdownContent);
@@ -216,5 +231,8 @@ document.body.addEventListener('click', function(event) {
   if (openDropdown && !event.target.closest('.sub-items')) {
     openDropdown.remove(); // Remove the open dropdown
     openDropdown = null; // Reset the openDropdown variable
+    rArrowIc.remove();
+    rArrowIc=null;
+
   }
 });

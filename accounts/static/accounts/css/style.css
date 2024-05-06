@@ -12,11 +12,11 @@ body {
     color: #ecf0f1; /* Light text color */
     transition: transform 0.3s ease-in-out;
     transform: translateX(-250px); /* Initially hidden */
-    position: fixed;
-    top: 0;
+    position:absolute;
+    top: 80px;
     left: 0;
     z-index: 1000; /* Ensure sidebar is above the strip */
-    overflow-y: auto; /* Make sidebar scrollable */
+    overflow-y: auto; /*Make sidebar scrollable*/
   }
   
   .sidebar-content {
@@ -53,8 +53,8 @@ body {
   
   /* Strip */
   .invisible-trigger {
-    position: fixed;
-    top: 0;
+    /* position: fixed; */
+    top: 80;
     left: 0;
     width: 40px; /* Width of the strip */
     height: 100vh;
@@ -100,14 +100,14 @@ body {
   /* Hover effect for sub-items */
   .sub-items a:hover {
     background-color:white; /* Darker background color on hover */
-    color: rosybrown; /* Light text color on hover */
+    color: rgb(16, 191, 89); /* Light text color on hover */
   }
   
   /* Dropdown Content */
   .dropdown-content {
     display: none;
     position: fixed;
-    background-color:rgb(56, 40, 176); /* Dark blue background */
+    background-color: #34495e; /* Dark blue background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     width: 250px; /* Set width of dropdown */
@@ -124,7 +124,7 @@ body {
   
   /* Hover effect for dropdown links */
   .dropdown-content a:hover {
-    background-color:white; /* Darker background color on hover */
-    color : black;
+    background-color:#34495e; /* Darker background color on hover */
+    color :yellow;
   }
   
